@@ -28,10 +28,26 @@
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>
                     @endguest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('create-category') }}">Crear Categoría</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('get-categories') }}">Ver todas las Categorías</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('create-author') }}">Ver todos los Autores</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="contenedor-avisos">
+        @if(session()->has('success'))
+            <div class="alert alert-success">
+                {{ session()->get('success') }}
+            </div>
+        @endif
+    </div>
     @yield('content')
 
 </body>
