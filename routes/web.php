@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,4 +28,6 @@ Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 
 Route::middleware(['auth'])->group(function () {
     // Aquí van las rutas de la aplicación
+    Route::view('/create-category', 'category/create-category');
+    Route::post('/process-category-creation', [CategoryController::class, 'create']); 
 });
