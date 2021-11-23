@@ -50,4 +50,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('process-author-update', [WebController::class, 'processUpdateAuthor']);
 
     Route::get('delete-author/{id}', [WebController::class, 'deleteAuthor'])->where('id', '[0-9]+');
+
+    //LIBROS
+    Route::view('create-book', 'book/create-book')->name('create-book');
+    Route::post('process-book-creation', [WebController::class, 'createBook']); 
+
+    Route::get('get-books', [WebController::class, 'showBooks'])->name('get-books');
+
+    Route::get('edit-book/{id}', [WebController::class, 'updateBookView'])->where('id', '[0-9]+');
+    Route::post('process-book-update', [WebController::class, 'processUpdateBook']);
+
+    Route::get('delete-book/{id}', [WebController::class, 'deleteBook'])->where('id', '[0-9]+');
 });

@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\App\AppHandler;
 use App\Http\Controllers\App\CategoryHandler;
 use App\Http\Controllers\App\AuthorHandler;
+use App\Http\Controllers\App\BookHandler;
 
 class WebController extends Controller
 {
@@ -156,12 +157,9 @@ class WebController extends Controller
 
 
     /**
-     * LIBROS
+     * AUTORES
      */
 
-     /**
-      * TODO: seguir con las validaciones de las fechas y crear AuthorHandler.php
-      */
      public function createAuthor(Request $request)
      {
         $validator = $this->validateData(
@@ -198,7 +196,7 @@ class WebController extends Controller
             }
             else 
             {
-                // redirige a la vista de cración de categoría con error
+                // redirige a la vista de cración de autor con error
                 return redirect()
                             ->back()
                             ->withErrors(['msg' => 'Ha habido un problema con los datos introducidos, por favor inténtelo de nuevo'])
@@ -321,8 +319,58 @@ class WebController extends Controller
 
 
     /**
-     * AUTORES
+     * LIBROS
      */
+
+    public function createBook(Request $request)
+    {
+       $validator = $this->validateData(
+           $request, 
+           [
+               'title'         => 'required|unique:books,name|max:100',
+               'ISBN'          => 'required|unique:books,ISBN|max:100',
+               'description'   => 'required',
+               'author_id'     => 'required|author.id',
+           ], 
+           [
+               'title.required'             => 'El campo "Título del libro" es requerido',
+               'ISBN.required'              => 'El campo "ISBN" es requerido',
+               'description.required'       => 'El campo "Descripción" es requerido',
+               'author_id.required'         => 'El campo "Autor" es requerido',
+           ]
+       );
+       
+       if( $validator->isValidated )
+       {
+           // Crea el libro
+           $book = new AppHandler( new BookHandler() );
+           $bookData = [
+               'title'          => $request->title,
+               'ISBN'           => $request->ISBN,
+               'description'    => $request->description,
+               'author_id'      => $request->author_id
+           ];
+           if( $book->create($bookData) !== false )
+           {
+               // redirige a la vista principal del dashboard
+               return redirect("dashboard")
+                           ->with('success', 'Libro creado correctamente');
+           }
+           else 
+           {
+               // redirige a la vista de cración de libro con error
+               return redirect()
+                           ->back()
+                           ->withErrors(['msg' => 'Ha habido un problema con los datos introducidos, por favor inténtelo de nuevo'])
+                           ->withInput();
+           }
+       }
+       else 
+       {
+           // Los datos recibidos no son correctos
+           return $validator->validationResponse;
+       }
+    }
 
 
     /**

@@ -40,6 +40,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('create-author') }}">Crear Autor</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('get-books') }}">Ver Libro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('create-book') }}">Crear Libro</a>
+                    </li>
                 </ul>
             </div>
         </div>
