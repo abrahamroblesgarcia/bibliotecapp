@@ -35,7 +35,10 @@
                         <a class="nav-link" href="{{ route('get-categories') }}">Ver todas las Categorías</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('create-author') }}">Ver todos los Autores</a>
+                        <a class="nav-link" href="{{ route('get-authors') }}">Ver Autores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('create-author') }}">Crear Autor</a>
                     </li>
                 </ul>
             </div>

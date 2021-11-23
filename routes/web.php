@@ -40,7 +40,14 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('delete-category/{id}', [WebController::class, 'deleteCategory'])->where('id', '[0-9]+');
 
-    //LIBROS
+    //AUTORES
     Route::view('create-author', 'author/create-author')->name('create-author');
     Route::post('process-author-creation', [WebController::class, 'createAuthor']); 
+
+    Route::get('get-authors', [WebController::class, 'showAuthors'])->name('get-authors');
+
+    Route::get('edit-author/{id}', [WebController::class, 'updateAuthorView'])->where('id', '[0-9]+');
+    Route::post('process-author-update', [WebController::class, 'processUpdateAuthor']);
+
+    Route::get('delete-author/{id}', [WebController::class, 'deleteAuthor'])->where('id', '[0-9]+');
 });

@@ -24,11 +24,11 @@
         </div>
         <div class="contenedor-input">
             <label for="author-birth-date">Fecha de nacimiento del autor <span class="required">*</span></label>
-            <input name="birth-date" id="author-birth-date" type="date"/>
+            <input name="birth_date" id="author-birth-date" type="date"/>
         </div>
         <div class="contenedor-input">
             <label for="author-death-date">Fecha de fallecimiento del autor <span class="required">*</span></label>
-            <input name="death-date" id="author-death-date" type="date"/>
+            <input name="death_date" id="author-death-date" type="date"/>
         </div>
         <div class="contenedor-input">
             <input class="btn-submit" type="submit" value="Crear autor"/>
