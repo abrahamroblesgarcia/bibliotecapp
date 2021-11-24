@@ -15,11 +15,8 @@ use App\Http\Controllers\Web\WebController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('dashboard', [AuthController::class, 'dashboard']); 
+// Rutas de acceso público
+Route::get('', [AuthController::class, 'dashboard'])->name('dashboard'); 
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom'); 
 Route::get('registration', [AuthController::class, 'registration'])->name('register-user');
@@ -28,7 +25,6 @@ Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 
 Route::middleware(['auth'])->group(function () {
     // Aquí van las rutas de la aplicación
-
     //CATEGORIA
     Route::view('create-category', 'category/create-category')->name('create-category');
     Route::post('process-category-creation', [WebController::class, 'createCategory']); 
@@ -52,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('delete-author/{id}', [WebController::class, 'deleteAuthor'])->where('id', '[0-9]+');
 
     //LIBROS
-    Route::view('create-book', 'book/create-book')->name('create-book');
+    Route::get('create-book',[WebController::class, 'createBookView'])->name('create-book');
     Route::post('process-book-creation', [WebController::class, 'createBook']); 
 
     Route::get('get-books', [WebController::class, 'showBooks'])->name('get-books');

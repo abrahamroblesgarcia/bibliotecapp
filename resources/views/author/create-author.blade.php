@@ -1,3 +1,4 @@
+@section('content')
 <section class="contenedor-creacion-autor">
     <div class="contenedor-info-creacion-autor">
         <h1 class="encabezado-info-creacion-autor">Creación de autor</h1>
@@ -35,3 +36,5 @@
         </div>
     </form>
 </section>
+@endsection
+@include('dashboard')

@@ -1,3 +1,4 @@
+@section('content')
 <section class="contenedor-creacion-categoria">
     <div class="contenedor-info-creacion-categoria">
         <h1 class="encabezado-info-creacion-categoria">Creación de categoría</h1>
@@ -27,3 +28,5 @@
         </div>
     </form>
 </section>
+@endsection
+@include('dashboard')

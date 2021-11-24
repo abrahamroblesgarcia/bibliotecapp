@@ -1,3 +1,4 @@
+@section('content')
 <section class="contenedor-edicion-categoria">
     <div class="contenedor-avisos">
         @if(session()->has('success'))
@@ -37,3 +38,5 @@
         </div>
     </form>
 </section>
+@endsection
+@include('dashboard')

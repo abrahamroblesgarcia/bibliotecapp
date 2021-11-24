@@ -1,3 +1,4 @@
+@section('content')
 <section class="contenedor-creacion-libro">
     <div class="contenedor-info-creacion-libro">
         <h1 class="encabezado-info-creacion-libro">Creación de libro</h1>
@@ -27,7 +28,27 @@
             <textarea id="book-description" name="description"></textarea>
         </div>
         <div class="contenedor-input">
+            <label for="book-author">Autor Asociado</label>
+            <select name="author_id" id="book-author">
+                <option value="">seleccionar autor</option>
+                @foreach( $authors as $author )
+                    <option value="{{ $author->id }}">{{ $author->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="contenedor-input">
+            <label for="book-category">Categoría Asociada</label>
+            <select name="category_id[]" id="book-category" multiple>
+                <option value="">seleccionar categoria</option>
+                @foreach( $categories as $category )
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="contenedor-input">
             <input class="btn-submit" type="submit" value="Crear libro"/>
         </div>
     </form>
 </section>
+@endsection
+@include('dashboard')

@@ -3,6 +3,11 @@ namespace App\Http\Controllers\App;
 
 use App\Http\Controllers\App\AppControllerInterface;
 
+/**
+ * Clase encargada de manejar todos los datos de la aplicación.
+ * Utiliza intección de dependencias para manejar los datos de cada modelo de 
+ * forma centralizada.
+ */
 class AppHandler 
 {
     private $appController;

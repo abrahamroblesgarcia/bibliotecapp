@@ -7,8 +7,12 @@ use Hash;
 use Session;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\App\AppHandler;
+use App\Http\Controllers\App\BookHandler;
 
-
+/**
+ * Controlador encargado de establecer todas las rutas referentes a la autenticación en la aplicación.
+ */
 class AuthController extends Controller
 {
     public function index()
@@ -26,11 +30,11 @@ class AuthController extends Controller
    
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('dashboard')
+            return redirect()->intended('/')
                         ->withSuccess('Signed in');
         }
   
-        return redirect("login")->withSuccess('Login details are not valid');
+        return redirect("login")->withSuccess('El login no es válido');
     }
 
 
@@ -52,7 +56,7 @@ class AuthController extends Controller
         $data = $request->all();
         $check = $this->create($data);
          
-        return redirect("dashboard")->withSuccess('You have signed-in');
+        return redirect("dashboard")->withSuccess('Te has registrado correctamente');
     }
 
 
@@ -69,10 +73,15 @@ class AuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('dashboard');
+
+            $book = new AppHandler( new BookHandler() );
+            $books = $book->showAll();
+            return view('book.get-books', [
+                'books' => $book->showAll()
+            ]);
         }
   
-        return redirect("login")->withSuccess('You are not allowed to access');
+        return redirect("login")->withSuccess('No tienes permiso para acceder');
     }
     
 

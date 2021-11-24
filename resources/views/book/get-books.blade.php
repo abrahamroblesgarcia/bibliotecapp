@@ -1,3 +1,4 @@
+@section('content')
 <section class="contenedor-ver-libros">
     <div class="contenedor-avisos">
         @if(session()->has('success'))
@@ -25,6 +26,12 @@
                 <p>Título: {{ $book->title }}</p>
                 <p>ISBN: {{ $book->ISBN }}</p>
                 <p>Descripción: {{ $book->description }}</p>
+                <p>Autor: {{ $book->authors->name }}</p>
+                <p> Categorías:
+                @foreach($book->booksCategories as $category)
+                    {{ $category->name}} ,
+                @endforeach
+                </p>
                 <p><a href="/edit-book/{{ $book->id }}">Editar</a></p>
                 <p><a href="/delete-book/{{ $book->id }}">Borrar</a></p>
             </div>
@@ -32,3 +39,5 @@
         @endforeach
     </div>
 </section>
+@endsection
+@include('dashboard')

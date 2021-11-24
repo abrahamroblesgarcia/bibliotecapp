@@ -1,3 +1,4 @@
+@section('content')
 <section class="contenedor-ver-categorias">
     <div class="contenedor-avisos">
         @if(session()->has('success'))
@@ -31,3 +32,5 @@
         @endforeach
     </div>
 </section>
+@endsection
+@include('dashboard')

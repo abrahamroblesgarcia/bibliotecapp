@@ -1,6 +1,10 @@
 <?php 
 namespace App\Utils;
 
+/**
+ * Esta clase utiliza métodos que pueden ser útiles en otras partes de la aplicación 
+ * que no requieran de un contexto o unos requisitos funcionales específicos.
+ */
 class Util 
 {
     /**

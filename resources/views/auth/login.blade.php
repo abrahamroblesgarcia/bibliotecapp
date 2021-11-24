@@ -1,5 +1,3 @@
-@extends('app')
-
 @section('content')
 <main class="login-form">
     <div class="cotainer">
@@ -19,7 +17,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <input type="password" placeholder="Password" id="password" class="form-control" name="password" required>
+                                <input type="password" placeholder="contraseña" id="password" class="form-control" name="password" required>
                                 @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
@@ -28,13 +26,13 @@
                             <div class="form-group mb-3">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember"> Remember Me
+                                        <input type="checkbox" name="remember"> Recuérdame
                                     </label>
                                 </div>
                             </div>
 
                             <div class="d-grid mx-auto">
-                                <button type="submit" class="btn btn-dark btn-block">Signin</button>
+                                <button type="submit" class="btn btn-dark btn-block">Acceder</button>
                             </div>
                         </form>
 
@@ -45,3 +43,4 @@
     </div>
 </main>
 @endsection
+@include('dashboard')

@@ -25,9 +25,14 @@ class BookHandler implements AppControllerInterface
 
     public function create(Array $fields)
     {
-        if( Util::checkIfKeysExistsInArray($fields, ['title','ISBN','description','author_id']) )
+        if( Util::checkIfKeysExistsInArray($fields, ['title','ISBN','description','author_id','category_id']) )
         {
-            return Book::create($fields);
+            $book = Book::create($fields);
+
+            // añade todos los IDs de categoría a la tabla pivote.
+            $this->addPivotCategoriesInBook($book, $fields['category_id']);
+
+            return $book;
         }
         
         // No se han recibido los campos correctos
@@ -36,7 +41,7 @@ class BookHandler implements AppControllerInterface
 
     public function update(Array $fields)
     {
-        if( Util::checkIfKeysExistsInArray($fields, ['title','ISBN','description','author_id']) )
+        if( Util::checkIfKeysExistsInArray($fields, ['title','ISBN','description','author_id','category_id']) )
         {
             // 1º Obtiene el libro
             $book = $this->show($fields['id']);
@@ -49,6 +54,11 @@ class BookHandler implements AppControllerInterface
                 $book->description      = $fields['description'];
                 $book->author_id        = $fields['author_id'];
                 $book->save();
+
+                // Quita todos los IDs de categoría de la tabla pivote para este id de libro
+                $book->categories()->detach();
+                // añade todos los IDs de categoría a la tabla pivote.
+                $this->addPivotCategoriesInBook($book, $fields['category_id']);
     
                 return $book;
             }
@@ -70,5 +80,20 @@ class BookHandler implements AppControllerInterface
         }
 
         return false;
+    }
+
+
+    private function addPivotCategoriesInBook(&$book, $categories)
+    {
+        foreach( $categories as $category )
+        {
+            $book->categories()->attach(
+                $category,
+                [
+                    'book_id'       => $book->id,
+                    'category_id'   => $category
+                ]
+            );
+        }
     }
 }
